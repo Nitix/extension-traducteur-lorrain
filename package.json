@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -noEmit && esbuild src/traducteur-lorrain.ts --bundle --minify --sourcemap --target=chrome99,firefox99 --outfile=dist/traducteur-lorrain.js",
-    "postbuild": "shx cp manifest.json dist/",
+    "postbuild": "shx cp manifest.json dist/ && shx cp -r icons/ dist/",
+    "build:ext": "web-ext build --overwrite-dest true --source-dir dist",
+    "start:firefox": "web-ext run --source-dir ./dist/",
+    "lint": "web-ext lint --source-dir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -15,8 +18,9 @@
     "@vercel/ncc": "^0.33.4",
     "esbuild": "^0.14.38",
     "shx": "^0.3.4",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "web-ext": "^6.8.0"
   },
   "author": "Guillaume Pierson",
-  "license": "ISC"
+  "license": "MIT"
 }
